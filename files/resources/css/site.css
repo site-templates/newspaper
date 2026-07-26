@@ -1,0 +1,346 @@
+/*
+    Newspaper — theme aliases, typography, and the motion system.
+
+    This file is inlined right after Tailwind by @vite in the layout, so
+    everything here applies to every page. The tokens below become real
+    Tailwind utilities: bg-canvas, text-ink, text-muted, border-line,
+    bg-panel, text-accent, font-display, and so on.
+*/
+
+@theme {
+    /*
+        The palette, aliased onto the semantic theme tokens in
+        resources/css/theme.css — change the theme from the builder's Theme
+        panel and the whole paper follows. Fonts live there too: Playfair
+        Display for display, Inter for body by default.
+    */
+    --color-canvas: var(--background);
+    --color-panel: var(--card);
+    --color-raised: var(--secondary);
+    --color-line: var(--border);
+
+    /* Text */
+    --color-ink: var(--foreground);
+    --color-muted: var(--muted-foreground);
+    --color-faint: color-mix(in oklab, var(--muted-foreground) 68%, var(--background));
+
+    /* The accent — printer's ink on this monochrome paper, used with intent */
+    --color-accent: var(--primary);
+    --color-accent-ink: var(--primary-foreground);
+    --color-accent-soft: color-mix(in oklab, var(--primary) 7%, var(--background));
+
+    /* One easing for everything interactive: fast in, long soft settle */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cross-page navigation fades — the whole paper feels like one continuous sheet. */
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 200ms;
+    animation-timing-function: ease;
+}
+
+html {
+    background-color: var(--color-canvas);
+    scrollbar-color: var(--color-line) transparent;
+}
+
+/* One stray wide element must never give the whole page a sideways scroll. */
+body {
+    overflow-x: clip;
+}
+
+::selection {
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+}
+
+/* Reduce the default focus halo to a crisp ink ring. */
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/*
+    The reveal system. main.js adds .js to <html> before first paint, then an
+    IntersectionObserver flips .is-visible as each [data-reveal] element
+    scrolls into view. Without JavaScript nothing is ever hidden. Stagger a
+    group with the .reveal-N utilities below.
+*/
+.js [data-reveal] {
+    opacity: 0;
+    translate: 0 14px;
+    transition:
+        opacity 0.8s var(--ease-spring),
+        translate 0.8s var(--ease-spring);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal].is-visible {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.reveal-1 { --reveal-delay: 70ms; }
+.reveal-2 { --reveal-delay: 140ms; }
+.reveal-3 { --reveal-delay: 210ms; }
+.reveal-4 { --reveal-delay: 280ms; }
+
+/*
+    The press bar: a compact fixed masthead that slides down once the full
+    masthead has scrolled away. main.js toggles data-scrolled when the reader
+    passes the fold of the front-page banner.
+*/
+#pressbar {
+    translate: 0 -100%;
+    transition: translate 0.35s var(--ease-out-quart), box-shadow 0.35s ease;
+}
+
+#pressbar[data-scrolled] {
+    translate: 0 0;
+    box-shadow: 0 1px 0 var(--color-line);
+}
+
+/* The mobile menu panel — folds down under the press bar as one sheet. */
+[data-mobile-panel] {
+    opacity: 0;
+    translate: 0 -8px;
+    visibility: hidden;
+    transition:
+        opacity 0.28s var(--ease-out-quart),
+        translate 0.28s var(--ease-out-quart),
+        visibility 0s linear 0.28s;
+}
+
+.menu-open [data-mobile-panel] {
+    opacity: 1;
+    translate: 0 0;
+    visibility: visible;
+    transition:
+        opacity 0.32s var(--ease-out-quart),
+        translate 0.32s var(--ease-out-quart),
+        visibility 0s;
+}
+
+.menu-open {
+    overflow: hidden;
+}
+
+/*
+    The wire ticker. The track holds the headline run twice; the animation
+    slides one full run's width, so the loop is seamless. Pauses on hover
+    and disappears politely for reduced-motion readers.
+*/
+.ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker-run 36s linear infinite;
+}
+
+.ticker-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes ticker-run {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/*
+    Headlines underline on hover with a hairline the color of faded ink —
+    the classic newspaper affordance, kept quiet.
+*/
+.headline-link {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.headline-link:hover,
+a:hover .headline-link {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in oklab, var(--color-ink) 45%, transparent);
+    text-underline-offset: 4px;
+}
+
+/*
+    The Most Read list numbers itself with a CSS counter — a serif figure in
+    faded ink ahead of each headline.
+*/
+.most-read {
+    counter-reset: most-read;
+}
+
+.most-read a::before {
+    counter-increment: most-read;
+    content: counter(most-read, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    line-height: 1.1;
+    color: var(--color-faint);
+    min-width: 2rem;
+}
+
+/* Photography sits in hairline frames and eases in a touch on hover. */
+.photo {
+    overflow: hidden;
+}
+
+.photo img {
+    transition: transform 0.7s var(--ease-out-quart), opacity 0.7s ease;
+}
+
+a:hover .photo img,
+a.photo:hover img {
+    transform: scale(1.025);
+}
+
+/*
+    Long-form typography for articles, tuned for the paper canvas and set a
+    notch larger than a web default — this is a reading surface first.
+    Headings take the display face so Theme-panel font swaps reach them.
+*/
+.prose {
+    color: color-mix(in oklab, var(--color-ink) 88%, var(--color-canvas));
+    font-size: 1.125rem;
+    line-height: 1.85;
+}
+
+.prose > * + * {
+    margin-top: 1.5em;
+}
+
+.prose h2 {
+    margin-top: 2.4em;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 1.625rem;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+}
+
+.prose h3 {
+    margin-top: 2em;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 1.3125rem;
+    font-weight: 600;
+}
+
+.prose a {
+    color: var(--color-ink);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in oklab, var(--color-ink) 40%, transparent);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.prose a:hover {
+    text-decoration-color: var(--color-ink);
+}
+
+.prose strong {
+    color: var(--color-ink);
+    font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+    padding-left: 1.4em;
+}
+
+.prose ul {
+    list-style: disc;
+}
+
+.prose ol {
+    list-style: decimal;
+}
+
+.prose li {
+    margin-top: 0.55em;
+    padding-left: 0.25em;
+}
+
+.prose li::marker {
+    color: var(--color-faint);
+}
+
+.prose blockquote {
+    margin-top: 1.8em;
+    margin-bottom: 1.8em;
+    border-left: 2px solid var(--color-ink);
+    padding-left: 1.5em;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    line-height: 1.55;
+}
+
+.prose blockquote cite {
+    display: block;
+    margin-top: 0.9em;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.prose hr {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border: 0;
+    border-top: 1px solid var(--color-line);
+}
+
+.prose img {
+    border: 1px solid var(--color-line);
+}
+
+.prose figcaption {
+    margin-top: 0.9em;
+    font-size: 0.8125rem;
+    color: var(--color-faint);
+}
+
+/*
+    The opening drop cap — the article layout adds .prose-dropcap when its
+    toggle is on. Sized to sit flush across three lines of body text.
+*/
+.prose-dropcap > p:first-child::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 4.4em;
+    line-height: 0.78;
+    padding-right: 0.12em;
+    padding-top: 0.06em;
+    color: var(--color-ink);
+    font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] {
+        opacity: 1;
+        translate: 0 0;
+        transition: none;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+
+    .ticker-track {
+        animation: none;
+    }
+}

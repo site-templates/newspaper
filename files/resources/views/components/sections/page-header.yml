@@ -1,0 +1,16 @@
+title: Page header
+description: A centered opener — eyebrow, serif heading, optional standfirst
+fields:
+    eyebrow:
+        type: text
+        label: Eyebrow
+        default: ""
+    heading:
+        type: text
+        label: Heading
+        default: "All Stories"
+    body:
+        type: textarea
+        label: Standfirst
+        rows: 3
+        default: ""

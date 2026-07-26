@@ -1,0 +1,46 @@
+# The visual editor's contract for components/nav.blade.php — these fields
+# surface under the Layout tab. Field names are camelCase, matching the props
+# they fill.
+title: Masthead
+description: The nameplate, service row, desk navigation, and the compact press bar that appears on scroll
+fields:
+    brand:
+        type: text
+        label: Nameplate
+        default: "The Newspaper"
+    tagline:
+        type: text
+        label: Motto
+        description: The small-caps line under the nameplate.
+        default: "An independent record of the quiet forces shaping how we live"
+    edition:
+        type: text
+        label: Edition
+        default: "Vol. I — No. 47"
+    dateline:
+        type: text
+        label: Dateline
+        default: "Saturday, July 26, 2026"
+    ctaText:
+        type: text
+        label: Button text
+        default: "Subscribe"
+    ctaLink:
+        type: url
+        label: Button link
+        default: "/#newsletter"
+    links:
+        type: repeater
+        label: Desk links
+        source: site.nav_links
+        add_button_label: "Add link"
+        item_label: text
+        sub_fields:
+            text:
+                type: text
+                label: Text
+                default: "New link"
+            url:
+                type: url
+                label: Link
+                default: "/"

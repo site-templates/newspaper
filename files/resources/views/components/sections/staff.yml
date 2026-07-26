@@ -1,0 +1,30 @@
+title: Masthead staff
+description: The staff grid — portraits, names, and roles from the staff collection
+fields:
+    heading:
+        type: text
+        label: Heading
+        default: "The Masthead"
+    subheading:
+        type: text
+        label: Right-side note
+        default: "The people who argue over every sentence"
+    items:
+        type: repeater
+        label: Staff
+        source: staff
+        add_button_label: "Add person"
+        item_label: name
+        sub_fields:
+            name:
+                type: text
+                label: Name
+                default: "New Colleague"
+            role:
+                type: text
+                label: Role
+                default: "Reporter"
+            avatar:
+                type: image
+                label: Portrait
+                default: ""

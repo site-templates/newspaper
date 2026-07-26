@@ -1,0 +1,41 @@
+title: Weekend feature
+description: An oversized centered headline over a full-bleed photograph — the front page's showpiece
+fields:
+    anchor:
+        type: text
+        label: Anchor id
+        description: Lets navigation links jump to this section.
+        default: ""
+    kicker:
+        type: text
+        label: Kicker
+        default: "The Weekend Feature"
+    heading:
+        type: text
+        label: Headline
+        default: "The Blanket Menders of the Alps"
+    excerpt:
+        type: textarea
+        label: Standfirst
+        rows: 3
+        default: "Every June, a small crew hikes up to wrap a dying glacier in white. It works — a little. The question is what working means now."
+    linkText:
+        type: text
+        label: Button text
+        default: "Read the dispatch"
+    link:
+        type: url
+        label: Link
+        default: "/articles/blanket-menders-of-the-alps"
+    image:
+        type: image
+        label: Photograph
+        default: "/images/glacier.jpg"
+    imageAlt:
+        type: text
+        label: Photo alt text
+        default: "An alpine glacier partly covered in white protective blankets"
+    credit:
+        type: text
+        label: Photo credit
+        default: "Photograph by Milo Andrade for The Newspaper"

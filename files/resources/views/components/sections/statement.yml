@@ -1,0 +1,33 @@
+title: Mission statement
+description: The manifesto beside the newsroom photograph
+fields:
+    kicker:
+        type: text
+        label: Kicker
+        default: "Our Mission"
+    heading:
+        type: text
+        label: Heading
+        default: "Slow the news down until it is true"
+    body1:
+        type: textarea
+        label: First paragraph
+        rows: 5
+        default: "The Newspaper is an independent publication with one deadline: when the story is ready. We cover the quiet forces that actually shape how people live — housing, infrastructure, climate, culture, the machines humming behind everything — and we skip the outrage cycle entirely."
+    body2:
+        type: textarea
+        label: Second paragraph
+        rows: 4
+        default: "No trackers, no autoplay, no twelve-part push alerts. Just reported stories, edited hard, published when they hold up. If a piece is on this front page, at least three people argued about every sentence in it."
+    image:
+        type: image
+        label: Photograph
+        default: "/images/newsroom.jpg"
+    imageAlt:
+        type: text
+        label: Photo alt text
+        default: "The newsroom in late afternoon light"
+    credit:
+        type: text
+        label: Caption
+        default: "The newsroom, photographed on an ordinary Tuesday"

@@ -1,0 +1,33 @@
+title: Newsletter
+description: The centered Early Edition sign-up band
+fields:
+    anchor:
+        type: text
+        label: Anchor id
+        description: Lets navigation links jump to this section.
+        default: "newsletter"
+    kicker:
+        type: text
+        label: Kicker
+        default: "The Early Edition"
+    heading:
+        type: text
+        label: Heading
+        default: "The morning, already read for you"
+    body:
+        type: textarea
+        label: Body
+        rows: 3
+        default: "One email at six. The three stories worth your coffee, chosen by the editors — never by the feed."
+    placeholder:
+        type: text
+        label: Input placeholder
+        default: "you@example.com"
+    buttonText:
+        type: text
+        label: Button text
+        default: "Sign up"
+    note:
+        type: text
+        label: Small print
+        default: "Free forever. Unsubscribe any morning."

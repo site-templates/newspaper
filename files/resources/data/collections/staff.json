@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Marguerite Solano",
+        "role": "Editor-in-Chief",
+        "avatar": "https://assets.ui.sh/avatars/1.webp?size=160"
+    },
+    {
+        "name": "Ada Merrick",
+        "role": "Cities Correspondent",
+        "avatar": "https://assets.ui.sh/avatars/11.webp?size=160"
+    },
+    {
+        "name": "Jonas Feld",
+        "role": "Technology Reporter",
+        "avatar": "https://assets.ui.sh/avatars/5.webp?size=160"
+    },
+    {
+        "name": "Lena Hartwig",
+        "role": "Climate Desk",
+        "avatar": "https://assets.ui.sh/avatars/2.webp?size=160"
+    },
+    {
+        "name": "Theo Brandt",
+        "role": "Culture Critic",
+        "avatar": "https://assets.ui.sh/avatars/8.webp?size=160"
+    },
+    {
+        "name": "Imani Cole",
+        "role": "Film Correspondent",
+        "avatar": "https://assets.ui.sh/avatars/14.webp?size=160"
+    },
+    {
+        "name": "Milo Andrade",
+        "role": "Photography Director",
+        "avatar": "https://assets.ui.sh/avatars/6.webp?size=160"
+    },
+    {
+        "name": "June Park",
+        "role": "Design & Type",
+        "avatar": "https://assets.ui.sh/avatars/9.webp?size=160"
+    }
+]

@@ -1,0 +1,59 @@
+title: Story archive
+description: Every story as a ruled row — desk, headline, standfirst, photograph. Rows come from the articles collection.
+fields:
+    items:
+        type: repeater
+        label: Stories
+        source: articles
+        add_button_label: "Add story"
+        item_label: title
+        sub_fields:
+            title:
+                type: text
+                label: Headline
+                default: "A new story"
+            excerpt:
+                type: textarea
+                label: Excerpt
+                rows: 3
+                default: ""
+            category:
+                type: text
+                label: Desk
+                default: "News"
+            categoryUrl:
+                type: url
+                label: Desk link
+                default: "/articles"
+            author:
+                type: text
+                label: Author
+                default: ""
+            authorRole:
+                type: text
+                label: Author role
+                default: ""
+            authorImage:
+                type: image
+                label: Author photo
+                default: ""
+            date:
+                type: text
+                label: Date
+                default: ""
+            readTime:
+                type: text
+                label: Read time
+                default: ""
+            link:
+                type: url
+                label: Story link
+                default: "/articles"
+            image:
+                type: image
+                label: Photograph
+                default: ""
+            imageAlt:
+                type: text
+                label: Photo caption
+                default: ""

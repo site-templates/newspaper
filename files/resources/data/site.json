@@ -1,0 +1,108 @@
+{
+    "name": "Newspaper",
+    "theme": {
+        "palette": "paper",
+        "fonts": "playfair-inter",
+        "fonts_url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap",
+        "appearance": "light",
+        "appearance_class": ""
+    },
+    "nav_links": [
+        {
+            "text": "Today",
+            "url": "/"
+        },
+        {
+            "text": "Technology",
+            "url": "/#technology"
+        },
+        {
+            "text": "Culture",
+            "url": "/#culture"
+        },
+        {
+            "text": "Cities",
+            "url": "/#cities"
+        },
+        {
+            "text": "Climate",
+            "url": "/#climate"
+        },
+        {
+            "text": "All Stories",
+            "url": "/articles"
+        },
+        {
+            "text": "About",
+            "url": "/about"
+        }
+    ],
+    "footer_links": [
+        {
+            "text": "Desks",
+            "url": "#",
+            "children": [
+                {
+                    "text": "Technology",
+                    "url": "/#technology"
+                },
+                {
+                    "text": "Culture",
+                    "url": "/#culture"
+                },
+                {
+                    "text": "Cities",
+                    "url": "/#cities"
+                },
+                {
+                    "text": "Climate",
+                    "url": "/#climate"
+                }
+            ]
+        },
+        {
+            "text": "The Paper",
+            "url": "#",
+            "children": [
+                {
+                    "text": "All Stories",
+                    "url": "/articles"
+                },
+                {
+                    "text": "About",
+                    "url": "/about"
+                },
+                {
+                    "text": "The Early Edition",
+                    "url": "/#newsletter"
+                },
+                {
+                    "text": "Opinion",
+                    "url": "/#opinion"
+                }
+            ]
+        },
+        {
+            "text": "Elsewhere",
+            "url": "#",
+            "children": [
+                {
+                    "text": "Instagram",
+                    "url": "#"
+                },
+                {
+                    "text": "X / Twitter",
+                    "url": "#"
+                },
+                {
+                    "text": "YouTube",
+                    "url": "#"
+                },
+                {
+                    "text": "RSS",
+                    "url": "#"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+title: Wire ticker
+description: The scrolling headline band under the masthead. Headlines live in the ticker collection.
+fields:
+    label:
+        type: text
+        label: Label
+        default: "The Wire"
+    items:
+        type: repeater
+        label: Headlines
+        source: ticker
+        add_button_label: "Add headline"
+        item_label: text
+        sub_fields:
+            text:
+                type: text
+                label: Headline
+                default: "A new headline crosses the wire"
+            url:
+                type: url
+                label: Link
+                default: "/"

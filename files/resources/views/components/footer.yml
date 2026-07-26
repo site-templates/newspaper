@@ -1,0 +1,36 @@
+title: Footer
+description: The nameplate restated, the colophon line, and the link columns
+fields:
+    tagline:
+        type: textarea
+        label: Tagline
+        default: "Printed nowhere. Read everywhere."
+    copyright:
+        type: text
+        label: Copyright line
+        default: "© 2026 The Newspaper Company"
+    note:
+        type: text
+        label: Colophon note
+        default: "Set in Playfair Display & Inter"
+    backText:
+        type: text
+        label: Back-to-top label
+        default: "Back to top ↑"
+    columns:
+        type: repeater
+        label: Link columns
+        description: "Top-level rows are column titles; nest links under each."
+        source: site.footer_links
+        nestable: true
+        add_button_label: "Add column"
+        item_label: text
+        sub_fields:
+            text:
+                type: text
+                label: Text
+                default: "New link"
+            url:
+                type: url
+                label: Link
+                default: "/"

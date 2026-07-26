@@ -1,0 +1,20 @@
+{
+    "name": "Newspaper",
+    "dialect": "blade",
+    "description": "A monochrome broadsheet — centered serif masthead, a real front-page lead package, desk sections, a full-bleed photo feature, and eight reported stories.",
+    "icon": "🗞️",
+    "repo": "https://github.com/site-templates/newspaper",
+    "order": 15,
+    "category": "blog",
+    "theme": "light",
+    "accent": "#16150f",
+    "themeable": true,
+    "palette": "paper",
+    "fonts": "playfair-inter",
+    "appearance": "light",
+    "pages": [
+        "Home",
+        "All Stories",
+        "About"
+    ]
+}

@@ -1,0 +1,88 @@
+title: Desk section
+description: A ruled desk header plus every story from the articles collection that matches the desk name
+fields:
+    anchor:
+        type: text
+        label: Anchor id
+        description: Lets navigation links jump to this section.
+        default: ""
+    heading:
+        type: text
+        label: Heading
+        default: "Technology"
+    category:
+        type: text
+        label: Desk filter
+        description: Shows stories whose desk matches this exactly.
+        default: "Technology"
+    linkText:
+        type: text
+        label: Link text
+        default: "All stories"
+    linkUrl:
+        type: url
+        label: Link
+        default: "/articles"
+    layout:
+        type: select
+        label: Arrangement
+        options:
+            list: Ruled rows
+            grid: Two-up cards
+        default: "list"
+    items:
+        type: repeater
+        label: Stories
+        source: articles
+        add_button_label: "Add story"
+        item_label: title
+        sub_fields:
+            title:
+                type: text
+                label: Headline
+                default: "A new story"
+            excerpt:
+                type: textarea
+                label: Excerpt
+                rows: 3
+                default: ""
+            category:
+                type: text
+                label: Desk
+                default: "News"
+            categoryUrl:
+                type: url
+                label: Desk link
+                default: "/articles"
+            author:
+                type: text
+                label: Author
+                default: ""
+            authorRole:
+                type: text
+                label: Author role
+                default: ""
+            authorImage:
+                type: image
+                label: Author photo
+                default: ""
+            date:
+                type: text
+                label: Date
+                default: ""
+            readTime:
+                type: text
+                label: Read time
+                default: ""
+            link:
+                type: url
+                label: Story link
+                default: "/articles"
+            image:
+                type: image
+                label: Photograph
+                default: ""
+            imageAlt:
+                type: text
+                label: Photo caption
+                default: ""

@@ -1,0 +1,44 @@
+title: Opinion row
+description: Columnists' pull-quotes on a tinted band, each linking to its column. Quotes live in the opinions collection.
+fields:
+    anchor:
+        type: text
+        label: Anchor id
+        description: Lets navigation links jump to this section.
+        default: "opinion"
+    heading:
+        type: text
+        label: Heading
+        default: "Opinion"
+    subheading:
+        type: text
+        label: Right-side note
+        default: "Columns from the desks"
+    items:
+        type: repeater
+        label: Quotes
+        source: opinions
+        add_button_label: "Add quote"
+        item_label: author
+        sub_fields:
+            quote:
+                type: textarea
+                label: Quote
+                rows: 4
+                default: "A sentence worth printing."
+            author:
+                type: text
+                label: Author
+                default: "A Columnist"
+            role:
+                type: text
+                label: Role
+                default: "Contributing Writer"
+            avatar:
+                type: image
+                label: Portrait
+                default: ""
+            link:
+                type: url
+                label: Column link
+                default: "/articles"
