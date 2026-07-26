@@ -5,6 +5,7 @@
     'dateline' => 'Saturday, July 26, 2026',
     'ctaText' => 'Subscribe',
     'ctaLink' => '/#newsletter',
+    'newsletterText' => 'The Early Edition ↗',
     'links' => [],
 ])
 <!--
@@ -56,7 +57,7 @@
             <p class="truncate">{{ $dateline }}</p>
             <p class="max-sm:hidden">{{ $edition }}</p>
             <div class="flex items-center gap-4">
-                <a href="{{ $ctaLink }}" class="transition-colors duration-200 hover:text-ink max-md:hidden">The Early Edition ↗</a>
+                <a href="{{ $ctaLink }}" class="transition-colors duration-200 hover:text-ink max-md:hidden">{{ $newsletterText }}</a>
                 <button
                     type="button"
                     data-mobile-toggle

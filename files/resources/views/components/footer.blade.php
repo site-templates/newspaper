@@ -1,4 +1,5 @@
 @props([
+    'brand' => 'The Newspaper',
     'tagline' => 'Printed nowhere. Read everywhere.',
     'copyright' => '© 2026 The Newspaper Company',
     'note' => 'Set in Playfair Display & Inter',
@@ -19,7 +20,7 @@
                     <svg viewBox="0 0 24 24" class="size-5 shrink-0" aria-hidden="true">
                         <path fill="currentColor" fill-rule="evenodd" d="M3 3h18v18H3V3Zm2.5 2.5v6h13v-6h-13Zm0 8.5v1.5h13V14h-13Zm0 3.5V19h9v-1.5h-9Z"/>
                     </svg>
-                    <span class="font-display text-2xl font-semibold tracking-tight">The Newspaper</span>
+                    <span class="font-display text-2xl font-semibold tracking-tight">{{ $brand }}</span>
                 </a>
                 <p class="mt-5 max-w-[30ch] text-sm/6 text-muted">{{ $tagline }}</p>
             </div>

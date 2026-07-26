@@ -1,6 +1,10 @@
 title: Footer
 description: The nameplate restated, the colophon line, and the link columns
 fields:
+    brand:
+        type: text
+        label: Nameplate
+        default: "The Newspaper"
     tagline:
         type: textarea
         label: Tagline
