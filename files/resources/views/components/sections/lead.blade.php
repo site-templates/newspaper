@@ -19,8 +19,11 @@
                 @foreach ($items as $item)
                 @continue($loop->first)
                 <article class="mb-7 border-b border-line pb-7 last:mb-0 last:border-0 last:pb-0">
-                    <p class="text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">{{ $item->category }}</p>
-                    <h3 class="mt-2.5 font-display text-xl font-semibold leading-snug text-pretty">
+                    <a href="{{ $item->link }}" class="photo block border border-line">
+                        <img src="{{ $item->image }}" alt="{{ $item->imageAlt }}" class="aspect-[3/2] w-full object-cover" loading="lazy">
+                    </a>
+                    <p class="mt-4 text-[11px] font-semibold tracking-[0.18em] text-muted uppercase">{{ $item->category }}</p>
+                    <h3 class="mt-2 font-display text-xl font-semibold leading-snug text-pretty">
                         <a href="{{ $item->link }}" class="headline-link">{{ $item->title }}</a>
                     </h3>
                     <p class="mt-2.5 text-sm/6 text-muted">{{ $item->excerpt }}</p>
@@ -35,7 +38,13 @@
                 @foreach ($items as $item)
                 @continue(!$loop->first)
                 <article data-reveal>
-                    <p class="text-[11px] font-semibold tracking-[0.18em] uppercase">
+                    <a href="{{ $item->link }}" class="block">
+                        <span class="photo block border border-line">
+                            <img src="{{ $item->image }}" alt="{{ $item->imageAlt }}" class="aspect-[16/10] w-full object-cover">
+                        </span>
+                        <span class="mt-2.5 block text-xs text-faint">{{ $item->imageAlt }}</span>
+                    </a>
+                    <p class="mt-5 text-[11px] font-semibold tracking-[0.18em] uppercase">
                         <a href="{{ $item->categoryUrl }}" class="text-muted transition-colors duration-200 hover:text-ink">{{ $item->category }}</a>
                     </p>
                     <h2 class="mt-3 font-display text-3xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]">
@@ -46,12 +55,6 @@
                         <img src="{{ $item->authorImage }}" alt="" class="size-6 rounded-full object-cover" loading="lazy">
                         <p class="text-muted">By <span class="font-medium text-ink">{{ $item->author }}</span> <span class="text-faint">· {{ $item->date }} · {{ $item->readTime }}</span></p>
                     </div>
-                    <a href="{{ $item->link }}" class="mt-6 block">
-                        <span class="photo block border border-line">
-                            <img src="{{ $item->image }}" alt="{{ $item->imageAlt }}" class="aspect-[3/2] w-full object-cover">
-                        </span>
-                        <span class="mt-2.5 block text-xs text-faint">{{ $item->imageAlt }}</span>
-                    </a>
                 </article>
                 @endforeach
             </div>

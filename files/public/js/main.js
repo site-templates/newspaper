@@ -12,7 +12,8 @@ document.documentElement.classList.add('js');
 
 document.addEventListener('DOMContentLoaded', function () {
     pressBar();
-    mobileMenu();
+    drawer();
+    megaMenus();
     revealOnScroll();
     markCurrentMenuItem();
 });
@@ -44,13 +45,15 @@ function pressBar() {
 }
 
 /*
-    The mobile sheet. Every [data-mobile-toggle] button flips the same
-    menu-open class on <html>; site.css folds the panel down and locks
-    scrolling. Escape closes it from anywhere.
+    The left drawer. Every [data-drawer-toggle] button flips the same
+    menu-open class on <html>; site.css slides the drawer in from the left,
+    dims the page behind it, and locks scrolling. Escape and the backdrop
+    close it from anywhere.
 */
-function mobileMenu() {
+function drawer() {
     const root = document.documentElement;
-    const toggles = document.querySelectorAll('[data-mobile-toggle]');
+    const toggles = document.querySelectorAll('[data-drawer-toggle]');
+    const backdrop = document.querySelector('[data-drawer-backdrop]');
 
     if (!toggles.length) {
         return;
@@ -69,17 +72,84 @@ function mobileMenu() {
         });
     });
 
+    if (backdrop) {
+        backdrop.addEventListener('click', function () {
+            setOpen(false);
+        });
+    }
+
     document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape') {
             setOpen(false);
         }
     });
 
-    // Following a link should always close the sheet.
-    document.querySelectorAll('[data-mobile-panel] a').forEach(function (link) {
+    // Following a link should always close the drawer.
+    document.querySelectorAll('[data-drawer] a').forEach(function (link) {
         link.addEventListener('click', function () {
             setOpen(false);
         });
+    });
+}
+
+/*
+    The mega panels. Each desk link renders a full-width panel of matching
+    stories under the desk navigation; panels that came out empty (Today,
+    About, All Stories) are removed here. The rest open on hover with a
+    short grace period so the pointer can travel from link to panel.
+*/
+function megaMenus() {
+    const nav = document.querySelector('[data-desknav]');
+
+    if (!nav) {
+        return;
+    }
+
+    let closeTimer = null;
+
+    function closeAll() {
+        nav.querySelectorAll('.mega-panel.is-open').forEach(function (panel) {
+            panel.classList.remove('is-open');
+        });
+        nav.querySelectorAll('[data-mega-open]').forEach(function (trigger) {
+            trigger.removeAttribute('data-mega-open');
+        });
+    }
+
+    nav.querySelectorAll('[data-mega-panel]').forEach(function (panel) {
+        const name = panel.getAttribute('data-mega-panel');
+        const trigger = nav.querySelector('[data-mega-trigger="' + CSS.escape(name) + '"]');
+
+        // A desk with no matching stories gets no dropdown.
+        if (!trigger || !panel.querySelector('article')) {
+            panel.remove();
+            return;
+        }
+
+        function open() {
+            clearTimeout(closeTimer);
+            closeAll();
+            panel.classList.add('is-open');
+            trigger.setAttribute('data-mega-open', '');
+        }
+
+        function scheduleClose() {
+            clearTimeout(closeTimer);
+            closeTimer = setTimeout(closeAll, 160);
+        }
+
+        trigger.closest('li').addEventListener('mouseenter', open);
+        trigger.closest('li').addEventListener('mouseleave', scheduleClose);
+        panel.addEventListener('mouseenter', function () {
+            clearTimeout(closeTimer);
+        });
+        panel.addEventListener('mouseleave', scheduleClose);
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeAll();
+        }
     });
 }
 

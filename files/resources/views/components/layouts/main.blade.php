@@ -1,11 +1,11 @@
-@props(['title' => 'Home', 'description' => ''])
+@props(['title' => 'Home', 'description' => '', 'menuItems' => []])
 <!doctype html>
 <html lang="en" class="scroll-smooth {{ $site->theme->appearance_class ?? '' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $title }} · The Newspaper</title>
+    <title>{{ $title }} · Newspaper</title>
     <meta name="description" content="{{ $description }}">
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -24,8 +24,9 @@
 </head>
 <body class="min-h-dvh bg-canvas font-sans text-ink antialiased">
 
-    <!-- The masthead and press bar. Links live in resources/data/site.json (nav_links). -->
-    <x-nav :links="$site->nav_links"/>
+    <!-- The masthead and press bar. Links live in resources/data/site.json (nav_links);
+         pages bind the articles collection to menuItems to feed the mega panels. -->
+    <x-nav :links="$site->nav_links" :items="$menuItems"/>
 
     <main class="relative">
         {{ $slot }}

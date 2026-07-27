@@ -7,9 +7,9 @@
     "order": 15,
     "category": "blog",
     "theme": "light",
-    "accent": "#16150f",
+    "accent": "#1c1917",
     "themeable": true,
-    "palette": "paper",
+    "palette": "slate",
     "fonts": "playfair-inter",
     "appearance": "light",
     "pages": [

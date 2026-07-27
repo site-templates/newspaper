@@ -2,17 +2,18 @@
 # surface under the Layout tab. Field names are camelCase, matching the props
 # they fill.
 title: Masthead
-description: The nameplate, service row, desk navigation, and the compact press bar that appears on scroll
+description: The inverse service row, the wordmark with menu box and header ad, the desk navigation with mega panels, and the left drawer
 fields:
     brand:
         type: text
-        label: Nameplate
-        default: "The Newspaper"
+        label: Brand name
+        description: Used for accessible labels — the nameplate itself is the wordmark in components/logo.blade.php.
+        default: "Newspaper"
     tagline:
         type: text
         label: Motto
-        description: The small-caps line under the nameplate.
-        default: "An independent record of the quiet forces shaping how we live"
+        description: The small-caps line under the wordmark. Keep it short — it prints on a single line.
+        default: "A news and magazine template for your next project"
     edition:
         type: text
         label: Edition
@@ -33,6 +34,32 @@ fields:
         type: text
         label: Service-row link text
         default: "The Early Edition ↗"
+    adLabel:
+        type: text
+        label: Ad slot caption
+        description: The small line printed above the header advertisement.
+        default: "Advertisement"
+    adEyebrow:
+        type: text
+        label: Ad eyebrow
+        default: "The Early Edition"
+    adHeading:
+        type: text
+        label: Ad headline
+        default: "Our best reporting, in your inbox every Saturday."
+    adCtaText:
+        type: text
+        label: Ad link text
+        default: "Sign up free"
+    adLink:
+        type: url
+        label: Ad link
+        default: "/#newsletter"
+    megaLinkText:
+        type: text
+        label: Mega panel link text
+        description: The "view everything" link inside each desk's dropdown.
+        default: "All coverage"
     links:
         type: repeater
         label: Desk links

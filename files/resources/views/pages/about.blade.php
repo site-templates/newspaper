@@ -1,5 +1,5 @@
 <!-- The about page — served at "/about". Staff come from resources/data/collections/staff.json. -->
-<x-layouts.main title="About" description="Who makes The Newspaper, and why it reads the way it does.">
+<x-layouts.main title="About" description="Who makes The Newspaper, and why it reads the way it does." :menuItems="$articles">
 
     <x-sections.page-header
         eyebrow="About the Paper"

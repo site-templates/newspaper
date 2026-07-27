@@ -106,29 +106,75 @@ body {
     box-shadow: 0 1px 0 var(--color-line);
 }
 
-/* The mobile menu panel — folds down under the press bar as one sheet. */
-[data-mobile-panel] {
-    opacity: 0;
-    translate: 0 -8px;
+/* The left drawer — every sections button slides it in over a dimmed page. */
+[data-drawer] {
+    translate: -100% 0;
     visibility: hidden;
     transition:
-        opacity 0.28s var(--ease-out-quart),
-        translate 0.28s var(--ease-out-quart),
-        visibility 0s linear 0.28s;
+        translate 0.35s var(--ease-out-quart),
+        visibility 0s linear 0.35s;
 }
 
-.menu-open [data-mobile-panel] {
-    opacity: 1;
+.menu-open [data-drawer] {
     translate: 0 0;
     visibility: visible;
     transition:
-        opacity 0.32s var(--ease-out-quart),
-        translate 0.32s var(--ease-out-quart),
+        translate 0.4s var(--ease-out-quart),
+        visibility 0s;
+}
+
+[data-drawer-backdrop] {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.3s ease,
+        visibility 0s linear 0.3s;
+}
+
+.menu-open [data-drawer-backdrop] {
+    opacity: 1;
+    visibility: visible;
+    transition:
+        opacity 0.3s ease,
         visibility 0s;
 }
 
 .menu-open {
     overflow: hidden;
+}
+
+/*
+    The mega panels. Each desk link with matching stories opens a full-width
+    panel under the desk navigation; main.js removes the empty ones and adds
+    hover intent. Closed panels are invisible and untouchable.
+*/
+.mega-panel {
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -6px;
+    border-bottom: 1px solid var(--color-line);
+    box-shadow: 0 24px 40px -28px color-mix(in oklab, var(--color-ink) 30%, transparent);
+    transition:
+        opacity 0.22s var(--ease-out-quart),
+        translate 0.22s var(--ease-out-quart),
+        visibility 0s linear 0.22s;
+}
+
+.mega-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    translate: 0 0;
+    transition:
+        opacity 0.28s var(--ease-out-quart),
+        translate 0.28s var(--ease-out-quart),
+        visibility 0s;
+}
+
+/* While its panel is open, the desk link holds its underline. */
+[data-mega-trigger][data-mega-open] {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
 }
 
 /*
@@ -342,5 +388,11 @@ a.photo:hover img {
 
     .ticker-track {
         animation: none;
+    }
+
+    [data-drawer],
+    [data-drawer-backdrop],
+    .mega-panel {
+        transition: none;
     }
 }

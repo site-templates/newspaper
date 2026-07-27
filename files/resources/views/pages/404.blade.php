@@ -1,5 +1,5 @@
 <!-- The not-found page, set like a correction notice. -->
-<x-layouts.main title="Page not found" description="That page is not in this edition.">
+<x-layouts.main title="Page not found" description="That page is not in this edition." :menuItems="$articles">
 
     <section class="border-b border-line">
         <div class="mx-auto flex min-h-[55vh] w-full max-w-2xl flex-col items-center justify-center px-6 py-20 text-center">

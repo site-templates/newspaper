@@ -3,8 +3,9 @@ description: The nameplate restated, the colophon line, and the link columns
 fields:
     brand:
         type: text
-        label: Nameplate
-        default: "The Newspaper"
+        label: Brand name
+        description: Used for accessible labels — the footer nameplate is the wordmark in components/logo.blade.php.
+        default: "Newspaper"
     tagline:
         type: textarea
         label: Tagline

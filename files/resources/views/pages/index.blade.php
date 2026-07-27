@@ -1,5 +1,5 @@
 <!-- The front page — served at "/". Stories come from resources/data/collections/articles.json. -->
-<x-layouts.main title="Home" description="The Newspaper — an independent record of the quiet forces shaping how we live.">
+<x-layouts.main title="Home" description="The Newspaper — an independent record of the quiet forces shaping how we live." :menuItems="$articles">
 
     <x-sections.ticker :items="$ticker"/>
 

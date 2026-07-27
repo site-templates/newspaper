@@ -21,7 +21,7 @@
     resources/css/site.css styles it via the .prose class. Bind the articles
     collection to related and the same-desk stories appear underneath.
 -->
-<x-layouts.main :title="$title" :description="$standfirst">
+<x-layouts.main :title="$title" :description="$standfirst" :menuItems="$related">
 
     <article class="pt-12 pb-20 sm:pt-16">
         <div class="mx-auto w-full max-w-7xl px-6">
