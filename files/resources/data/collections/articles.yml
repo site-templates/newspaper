@@ -1,0 +1,19 @@
+# Column types for articles.json — the source of truth the builder
+# reads: richtext columns open in the rich editor (Content drawer
+# and any section repeater listing this collection).
+fields:
+    title: { type: text }
+    excerpt: { type: textarea }
+    category: { type: text }
+    categoryUrl: { type: url }
+    author: { type: text }
+    authorRole: { type: text }
+    authorImage: { type: image }
+    date: { type: text }
+    readTime: { type: text }
+    link: { type: url }
+    image: { type: image }
+    imageAlt: { type: text }
+    slug: { type: text }
+    credit: { type: text }
+    content: { type: richtext }
