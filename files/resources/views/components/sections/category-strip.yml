@@ -86,3 +86,13 @@ fields:
                 type: text
                 label: Photo caption
                 default: ""
+
+            content:
+                type: richtext
+                label: "Story body"
+            credit:
+                type: text
+                label: "Photo credit"
+            slug:
+                type: text
+                label: "Slug"
