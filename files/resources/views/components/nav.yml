@@ -2,7 +2,7 @@
 # surface under the Layout tab. Field names are camelCase, matching the props
 # they fill.
 title: Masthead
-description: The inverse service row, the wordmark with menu box and header ad, the desk navigation with mega panels, and the left drawer
+description: The inverse service row, the wordmark flanked by the menu box and the follow rail, the desk navigation with mega panels, and the left drawer
 fields:
     brand:
         type: text
@@ -34,27 +34,33 @@ fields:
         type: text
         label: Service-row link text
         default: "The Early Edition ↗"
-    adLabel:
+    socialLabel:
         type: text
-        label: Ad slot caption
-        description: The small line printed above the header advertisement.
-        default: "Advertisement"
-    adEyebrow:
-        type: text
-        label: Ad eyebrow
-        default: "The Early Edition"
-    adHeading:
-        type: text
-        label: Ad headline
-        default: "Our best reporting, in your inbox every Saturday."
-    adCtaText:
-        type: text
-        label: Ad link text
-        default: "Sign up free"
-    adLink:
-        type: url
-        label: Ad link
-        default: "/#newsletter"
+        label: Follow label
+        description: The small-caps word printed before the social icons.
+        default: "Follow"
+    social:
+        type: repeater
+        label: Social links
+        source: site.social_links
+        add_button_label: "Add social link"
+        item_label: text
+        sub_fields:
+            text:
+                type: text
+                label: Name
+                description: Used as the link's accessible label.
+                default: "X"
+            url:
+                type: url
+                label: Link
+                default: "#"
+            icon:
+                type: textarea
+                label: Icon SVG
+                description: "Inline SVG. Use fill='currentColor' so it inverts with the square on hover."
+                rows: 3
+                default: ""
     megaLinkText:
         type: text
         label: Mega panel link text

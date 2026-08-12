@@ -6,11 +6,7 @@
     'ctaText' => 'Subscribe',
     'ctaLink' => '/#newsletter',
     'newsletterText' => 'The Early Edition ↗',
-    'adLabel' => 'Advertisement',
-    'adEyebrow' => 'The Early Edition',
-    'adHeading' => 'Our best reporting, in your inbox every Saturday.',
-    'adCtaText' => 'Sign up free',
-    'adLink' => '/#newsletter',
+    'socialLabel' => 'Follow',
     'megaLinkText' => 'All coverage',
     'links' => [],
     'items' => [],
@@ -18,12 +14,17 @@
 <!--
     The masthead. An inverse service row (dateline, edition, newsletter),
     the big centered serif nameplate flanked by the sections button and the
-    header advertisement, then the desk navigation under a hairline rule.
+    follow rail, then the desk navigation under a hairline rule. The two
+    ears deliberately share one shape — a 48px hairline square that inverts
+    to ink on hover — so the nameplate sits centred between them.
     Desks with stories in the articles collection grow a mega panel —
     main.js prunes the empty ones and handles hover intent. The sections
     button (and the press-bar hamburger) opens the left drawer. Links come
     from nav_links in resources/data/site.json; the layout passes them in
-    along with the articles collection for the mega panels.
+    along with the articles collection for the mega panels. The follow rail
+    reads social_links from that same file directly — it is a site-wide
+    singleton, so it needs no wiring from the layout. Each entry carries its
+    own inline SVG; use fill='currentColor' so the icon inverts on hover.
 -->
 <header data-masthead>
 
@@ -80,7 +81,7 @@
         </div>
     </div>
 
-    <!-- The nameplate, the menu box, and the header advertisement -->
+    <!-- The nameplate, flanked by the menu box and the follow rail -->
     <div class="mx-auto w-full max-w-7xl px-6 py-6 md:py-2">
         <div class="grid items-center md:grid-cols-[1fr_auto_1fr] md:gap-x-10">
 
@@ -104,18 +105,17 @@
                 <p class="mt-2.5 truncate text-[9px] tracking-[0.12em] text-muted uppercase sm:text-[11px] sm:tracking-[0.22em]">{{ $tagline }}</p>
             </div>
 
-            <div class="justify-self-end max-lg:hidden">
-                <a href="{{ $adLink }}" class="group block w-80 bg-ink p-4 text-canvas">
-                    <span class="flex items-baseline justify-between gap-4">
-                        <span class="block text-[10px] font-semibold tracking-[0.18em] text-canvas/70 uppercase">{{ $adEyebrow }}</span>
-                        <span class="block text-[10px] tracking-[0.18em] text-canvas/40 uppercase">{{ $adLabel }}</span>
-                    </span>
-                    <span class="mt-2 block font-display text-base font-semibold leading-snug tracking-tight text-balance">{{ $adHeading }}</span>
-                    <span class="mt-3 inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.16em] uppercase">
-                        {{ $adCtaText }}
-                        <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-                    </span>
-                </a>
+            <div class="flex items-center gap-4 justify-self-end max-lg:hidden">
+                <span class="text-[10px] font-semibold tracking-[0.18em] text-faint uppercase">{{ $socialLabel }}</span>
+                <ul role="list" class="flex items-center gap-2">
+                    @foreach ($site->social_links as $item)
+                    <li>
+                        <a href="{{ $item->url }}" aria-label="{{ $item->text }}" class="flex size-12 items-center justify-center border border-line text-ink transition-colors duration-200 hover:bg-ink hover:text-canvas">
+                            {!! $item->icon !!}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
             </div>
 
         </div>
