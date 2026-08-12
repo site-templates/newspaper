@@ -14,9 +14,10 @@
 <!--
     The masthead. An inverse service row (dateline, edition, newsletter),
     the big centered serif nameplate flanked by the sections button and the
-    follow rail, then the desk navigation under a hairline rule. The two
-    ears deliberately share one shape — a 48px hairline square that inverts
-    to ink on hover — so the nameplate sits centred between them.
+    follow rail, then the desk navigation under a hairline rule, then the
+    wire ticker. The two ears deliberately share one shape — a 48px
+    hairline square that inverts to ink on hover — so the nameplate sits
+    centred between them.
     Desks with stories in the articles collection grow a mega panel —
     main.js prunes the empty ones and handles hover intent. The sections
     button (and the press-bar hamburger) opens the left drawer. Links come
@@ -157,6 +158,11 @@
         @endforeach
     </nav>
     <div class="border-t border-line md:hidden"></div>
+
+    <!-- The wire — headlines drift under the masthead on every page.
+         Items come from resources/data/collections/ticker.json, which binds
+         globally, so no page has to pass them in. -->
+    <x-sections.ticker :items="$ticker"/>
 
     <!-- The left drawer — every sections button folds this out -->
     <div data-drawer-backdrop class="fixed inset-0 z-60 bg-ink/45" aria-hidden="true"></div>
