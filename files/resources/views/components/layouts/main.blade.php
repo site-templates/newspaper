@@ -22,7 +22,7 @@
     <script>document.documentElement.classList.add('js')</script>
     <script src="/js/main.js" defer></script>
 </head>
-<body class="min-h-dvh bg-canvas font-sans text-ink antialiased">
+<body class="min-h-dvh bg-canvas font-sans text-ink antialiased" data-instant-navigation>
 
     <!-- The masthead and press bar. Links live in resources/data/site.json (nav_links);
          pages bind the articles collection to menuItems to feed the mega panels. -->

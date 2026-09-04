@@ -4,19 +4,49 @@
     Everything here is a progressive enhancement: with JavaScript off, the
     navigation still works, nothing is hidden, and the paper stays fully
     readable. The matching transitions live in resources/css/site.css.
+
+    Pages change in place (data-instant-navigation on <body>): the press
+    bar, drawer and mega panels bind once, while the reveals inside <main>
+    are torn down and set up again for each new page through setUp(root).
 */
 
 // Flag the document early so CSS only hides reveal targets when JS will
 // actually reveal them. This file loads with defer, before first paint.
 document.documentElement.classList.add('js');
 
-document.addEventListener('DOMContentLoaded', function () {
-    pressBar();
-    drawer();
-    megaMenus();
-    revealOnScroll();
+// What the current <main> owns — released before the next one is set up.
+var revealObserver = null;
+
+// Closes the drawer; wired by drawer() once its buttons are found.
+var closeDrawer = function () {};
+
+// The masthead persists for the whole visit, so it binds once. This file is
+// deferred: the page is already parsed by the time it runs.
+pressBar();
+drawer();
+megaMenus();
+markCurrentMenuItem();
+setUp(document);
+
+document.addEventListener('instant:navigated', function (event) {
+    closeDrawer();
     markCurrentMenuItem();
+    setUp(event.detail.main);
 });
+
+// Everything that lives inside <main>, set up for the given root.
+function setUp(root) {
+    tearDown();
+    revealOnScroll(root);
+}
+
+// Let go of what the previous <main> was driving.
+function tearDown() {
+    if (revealObserver) {
+        revealObserver.disconnect();
+        revealObserver = null;
+    }
+}
 
 /*
     The press bar stays tucked above the viewport while the full masthead is
@@ -90,6 +120,10 @@ function drawer() {
             setOpen(false);
         });
     });
+
+    closeDrawer = function () {
+        setOpen(false);
+    };
 }
 
 /*
@@ -120,9 +154,12 @@ function megaMenus() {
         const name = panel.getAttribute('data-mega-panel');
         const trigger = nav.querySelector('[data-mega-trigger="' + CSS.escape(name) + '"]');
 
-        // A desk with no matching stories gets no dropdown.
+        // A desk with no matching stories gets no dropdown. The panel is
+        // hidden rather than removed, so the masthead keeps the same links
+        // as a freshly served page (instant navigation matches them by
+        // position when it carries the active state across).
         if (!trigger || !panel.querySelector('article')) {
-            panel.remove();
+            panel.hidden = true;
             return;
         }
 
@@ -158,8 +195,8 @@ function megaMenus() {
     viewport; the .reveal-N utilities stagger groups. Reduced-motion readers
     see everything immediately (site.css).
 */
-function revealOnScroll() {
-    const targets = document.querySelectorAll('[data-reveal]');
+function revealOnScroll(root) {
+    const targets = root.querySelectorAll('[data-reveal]');
 
     if (!targets.length || !('IntersectionObserver' in window)) {
         targets.forEach(function (el) {
@@ -180,11 +217,14 @@ function revealOnScroll() {
     targets.forEach(function (el) {
         observer.observe(el);
     });
+
+    revealObserver = observer;
 }
 
 /*
     Mark the desk link that matches the current page so the masthead can
-    style it via aria-[current].
+    style it via aria-[current]. Recomputed after every in-place navigation,
+    so the mark follows the page.
 */
 function markCurrentMenuItem() {
     const path = window.location.pathname.replace(/\/$/, '') || '/';
@@ -195,6 +235,8 @@ function markCurrentMenuItem() {
 
         if (href.indexOf('#') === -1 && target === path) {
             link.setAttribute('aria-current', 'page');
+        } else {
+            link.removeAttribute('aria-current');
         }
     });
 }
